@@ -2,7 +2,7 @@ import { useAppSelector } from "../redux/hooks";
 import { Link, NavLink } from "react-router";
 
 function Navbar() {
-  const cart = useAppSelector((state) => state.cart.data);
+  const { cart } = useAppSelector((state) => state.cart);
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary mb-5">
@@ -43,7 +43,9 @@ function Navbar() {
                 to="/cart"
               >
                 <span>Cart</span>
-                <span className="badge bg-danger mx-2">{cart.length}</span>
+                <span className="badge bg-danger mx-2">
+                  {cart?.products?.length ?? 0}
+                </span>
               </NavLink>
             </li>
           </ul>

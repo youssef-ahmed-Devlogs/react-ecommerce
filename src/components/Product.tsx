@@ -1,5 +1,4 @@
 import type { ProductType } from "@/types/product";
-import { addToCart } from "../redux/slices/cartSlice";
 import { useAppDispatch } from "../redux/hooks";
 
 const Product = ({ product }: { product: ProductType }) => {
@@ -7,22 +6,25 @@ const Product = ({ product }: { product: ProductType }) => {
 
   return (
     <div className="card">
+      <img
+        src={product.image}
+        className="card-img-top object-fit-contain"
+        alt={product.title}
+      />
       <div className="card-body">
-        <h4 className="card-title">{product.name}</h4>
+        <h4 className="card-title">
+          {product.title.length > 20
+            ? product.title.slice(0, 20) + "..."
+            : product.title}
+        </h4>
         <p className="card-text">$ {product.price}</p>
         <p className="card-text">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor
-          explicabo nesciunt vel sunt sint, porro quos quia, odio quae aliquam,
-          architecto veniam nam. Commodi optio, consectetur eos alias maxime
-          magnam?
+          {product.description.length > 90
+            ? product.description.slice(0, 90) + "..."
+            : product.description}
         </p>
 
-        <button
-          className="btn btn-primary"
-          onClick={() => dispatch(addToCart(product))}
-        >
-          Add To Cart
-        </button>
+        <button className="btn btn-primary">Add To Cart</button>
       </div>
     </div>
   );
